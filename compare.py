@@ -16,7 +16,7 @@ def amzn_get_asin(url):
     # Extract the search string from the URL by removing the first 8 characters
     search_string = url.strip("https://")
     # Split the search string by '/' and get the product ID at index 3
-    asin = search_string.split('/')[3] 
+    asin = search_string.split('/')[3]
     return asin
 
 
@@ -75,10 +75,6 @@ for i in range(cmp_items):
     url = input(f"Enter the Amazon URL [{i+1}]: ")
     urls.append(url)
     print("\n")
-
-# URL for the product
-#url_1 = "https://www.amazon.com/SAMSUNG-Bluetooth-Cancelling-Conversation-Resistant/dp/B0B2SFVRC2/ref=sr_1_1_sspa?crid=1639LOK5URB5X&keywords=samsung%2Bgalaxy%2Bbuds&qid=1689899797&sprefix=samsung%2Bgalaxy%2Bbuds%2Caps%2C123&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1"
-#url_2 = "https://www.amazon.com/Everyday-Raycon-Bluetooth-Wireless-Microphone/dp/B095T4DNV1/ref=sr_1_2_sspa?crid=1639LOK5URB5X&keywords=samsung+galaxy+buds&qid=1689899797&sprefix=samsung+galaxy+buds%2Caps%2C123&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"
 
 # Get the product details from Amazon
 product_details = [amzn_get_details_from_url(url) for url in urls]
