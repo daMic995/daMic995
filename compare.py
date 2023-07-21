@@ -46,7 +46,7 @@ def amzn_get_details_from_url(url):
     if response.status_code == 200:
         return response.json()
     else:
-        print("Error: " + str(response.status_code))
+        print("Error: " + str(response.status_code) + " ")
         return None
 
 
@@ -57,11 +57,11 @@ def amzn_get_product_details(details_dict):
 
     title = details_dict["result"][0]["title"]
     desc = details_dict["result"][0]["description"]
-    price = details_dict["result"][0]["price"]["symbol"] + details_dict["result"][0]["price"]["current_price"]
-    rating = details_dict["result"][0]["rating"]
-    no_of_reviews = details_dict["result"][0]["total_reviews"]
+    price = details_dict["result"][0]["price"]["symbol"] + str(details_dict["result"][0]["price"]["current_price"])
+    rating = details_dict["result"][0]["reviews"]["rating"]
+    no_of_reviews = details_dict["result"][0]["reviews"]["total_reviews"]
     images = details_dict["result"][0]["images"]
-    return {"title":title, "desc":desc, "price":price, "rating":rating, 
+    return {"title":title, "desc":desc, "price":price, "rating":rating,
             "no_of_reviews":no_of_reviews, "images":images}
 
 
@@ -86,8 +86,14 @@ product_details = [amzn_get_details_from_url(url) for url in urls]
 # Print the product details
 for details, i in zip(product_details, range(1, cmp_items + 1)):
     if details is not None:
-        print(f"Product Details [{i}] : {details}\n" )
+        print(f"""
+Product Details [{i}] ->
+Title: {amzn_get_product_details(details)["title"]}
+Description: {amzn_get_product_details(details)["desc"]}
+Price: {amzn_get_product_details(details)["price"]}
+Rating: {amzn_get_product_details(details)["rating"]}
+No. of Reviews: {amzn_get_product_details(details)["no_of_reviews"]}\n""")
     else:
-        print(f"""Error: 
-                Product Details [{i}] not found.\n""")
+        print(f"""Error ->
+Product Details [{i}] not found.\n""")
         
